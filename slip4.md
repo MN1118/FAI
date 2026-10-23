@@ -31,9 +31,9 @@ age = int(input("\nEnter person's age: "))
 prediction = model.predict([[age]]) 
 # Display result 
 if prediction[0] == 1: 
-print("Person is Eligible to Vote.") 
+  print("Person is Eligible to Vote.") 
 else: 
-print("Person is Not Eligible to Vote.") 
+  print("Person is Not Eligible to Vote.") 
 ```
 
 Q2) B.Write a python program to Implement Alpha-Beta Pruning .                                    
