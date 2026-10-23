@@ -2,11 +2,15 @@ Q1) A  .Write a python program to show proper indentation using if statement.
 [10 marks] 
 Program : 
 ```py
-num = int(input("Enter a number: ")) 
-if num > 0: 
-print("The number is positive.") 
-print("This statement is inside the if block.") 
-print("Program execution completed.") 
+
+num = int(input("Enter a number: "))
+
+if num > 0:
+    print("The number is positive.")
+    print("This statement is inside the if block.")
+
+print("Program execution completed.")
+
 ```
 
 Sample Output 
@@ -98,48 +102,59 @@ Q2)B.Write a python program to design a Model-Based Agent that maintains
 an internal state of room cleanliness and decides actions based on both 
 current perception and stored memory.
 ```py
-# Model-Based Agent for Room Cleaning 
-class ModelBasedAgent: 
-def __init__(self): 
-# Internal state (memory) 
-self.room_state = { 
-"Room": "Unknown" 
-} 
-def perceive(self, room): 
-# Get current perception 
-return room 
-def update_state(self, room, perception): 
-# Update internal state using perception 
-self.room_state[room] = perception 
-def choose_action(self, room): 
-# Decide action using current state and 
-memory 
-if self.room_state[room] == "Dirty": 
-return "Clean the room" 
-elif self.room_state[room] == "Clean": 
-return "Room is already clean" 
-else: 
-return "Check the room" 
-def run(self, room, perception): 
-current_perception = 
-self.perceive(perception) 
-# Update internal memory 
-self.update_state(room, current_perception) 
-# Choose action 
-action = self.choose_action(room) 
-print("Current Perception :", 
-current_perception) 
-print("Internal State     :", 
-self.room_state[room]) 
-print("Action             :", action) 
-# Create agent 
-agent = ModelBasedAgent() 
-# First perception 
-print("First Observation") 
-agent.run("Room", "Dirty") 
-# Second perception 
-print("\nSecond Observation") 
-agent.run("Room", "Clean") 
+
+# Model-Based Agent for Room Cleaning
+
+class ModelBasedAgent:
+
+    def __init__(self):
+        # Internal state (memory)
+        self.room_state = {
+            "Room": "Unknown"
+        }
+
+    def perceive(self, room):
+        # Get current perception
+        return room
+
+    def update_state(self, room, perception):
+        # Update internal state using perception
+        self.room_state[room] = perception
+
+    def choose_action(self, room):
+        # Decide action using current state and memory
+        if self.room_state[room] == "Dirty":
+            return "Clean the room"
+        elif self.room_state[room] == "Clean":
+            return "Room is already clean"
+        else:
+            return "Check the room"
+
+    def run(self, room, perception):
+        current_perception = self.perceive(perception)
+
+        # Update internal memory
+        self.update_state(room, current_perception)
+
+        # Choose action
+        action = self.choose_action(room)
+
+        print("Current Perception :", current_perception)
+        print("Internal State     :", self.room_state[room])
+        print("Action             :", action)
+
+
+# Create agent
+agent = ModelBasedAgent()
+
+# First perception
+print("First Observation")
+agent.run("Room", "Dirty")
+
+# Second perception
+print("\nSecond Observation")
+agent.run("Room", "Clean")
+
 ```
 
 
