@@ -40,55 +40,73 @@ Q2) B.Write a python program to Implement Alpha-Beta Pruning .
 [20 marks] 
 
 ```py
-# Alpha-Beta Pruning Algorithm 
-def alpha_beta(depth, node, alpha, beta, 
-maximizing_player): 
-# Leaf node 
-if depth == 3: 
-return values[node] 
-if maximizing_player: 
-best = -999 
-for i in range(2): 
-value = alpha_beta( 
-depth + 1, 
-node * 2 + i, 
-alpha, 
-beta, 
-False 
-) 
-best = max(best, value) 
-alpha = max(alpha, best) 
-# Beta cut-off 
-if beta <= alpha: 
-print("Beta Pruning at node:", node) 
-break 
-return best 
-else: 
-best = 999 
-for i in range(2): 
-value = alpha_beta( 
-depth + 1, 
-node * 2 + i, 
-alpha, 
-beta, 
-True 
-) 
-best = min(best, value) 
-beta = min(beta, best) 
-# Alpha cut-off 
-if beta <= alpha: 
-print("Alpha Pruning at node:", node) 
-break 
-return best 
-# Leaf node values 
-values = [3, 5, 6, 9, 1, 2, 0, -1] 
-# Initial values 
-alpha = -999 
-beta = 999 
-# Call Alpha-Beta algorithm 
-result = alpha_beta(0, 0, alpha, beta, True) 
-print("\nLeaf Node Values:", values) 
+
+# Alpha-Beta Pruning Algorithm
+
+def alpha_beta(depth, node, alpha, beta, maximizing_player):
+
+    # Leaf node
+    if depth == 3:
+        return values[node]
+
+    if maximizing_player:
+        best = -999
+
+        for i in range(2):
+            value = alpha_beta(
+                depth + 1,
+                node * 2 + i,
+                alpha,
+                beta,
+                False
+            )
+
+            best = max(best, value)
+            alpha = max(alpha, best)
+
+            # Beta cut-off
+            if beta <= alpha:
+                print("Beta Pruning at node:", node)
+                break
+
+        return best
+
+    else:
+        best = 999
+
+        for i in range(2):
+            value = alpha_beta(
+                depth + 1,
+                node * 2 + i,
+                alpha,
+                beta,
+                True
+            )
+
+            best = min(best, value)
+            beta = min(beta, best)
+
+            # Alpha cut-off
+            if beta <= alpha:
+                print("Alpha Pruning at node:", node)
+                break
+
+        return best
+
+
+# Leaf node values
+values = [3, 5, 6, 9, 1, 2, 0, -1]
+
+# Initial values
+alpha = -999
+beta = 999
+
+# Call Alpha-Beta algorithm
+result = alpha_beta(0, 0, alpha, beta, True)
+
+print("\nLeaf Node Values:", values)
 print("Optimal Value:", result)
+
 ```
 
 OR 
