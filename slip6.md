@@ -4,34 +4,52 @@ Q1)A.Write a python program to implement Hill Climbing Algorithm .
 [10 marks]
 
 ```py
-def hill_climbing(values, start): 
-current = start 
-while True: 
-print("Current Position:", current, "Value:", 
-values[current]) 
-# Check left and right neighbours 
-neighbours = [] 
-if current > 0: 
-neighbours.append(current - 1) 
-if current < len(values) - 1: 
-neighbours.append(current + 1) 
-# Find the best neighbouring position 
-best = current 
-for position in neighbours: 
-if values[position] > values[best]: 
-best = position 
-# Stop if no better neighbour is found 
-if best == current: 
-break 
-current = best 
-print("Local Maximum:", values[current]) 
-print("Position:", current) 
-# Input values 
-values = [2, 5, 8, 12, 15, 11, 7, 4] 
-print("Hill Climbing Algorithm") 
-print("Values:", values) 
-start = int(input("Enter starting position (0-7): ")) 
-hill_climbing(values, start) 
+
+def hill_climbing(values, start):
+    current = start
+
+    while True:
+        print("Current Position:", current, "Value:", values[current])
+
+        # Check left and right neighbours
+        neighbours = []
+
+        if current > 0:
+            neighbours.append(current - 1)
+
+        if current < len(values) - 1:
+            neighbours.append(current + 1)
+
+        # Find the best neighbouring position
+        best = current
+
+        for position in neighbours:
+            if values[position] > values[best]:
+                best = position
+
+        # Stop if no better neighbour is found
+        if best == current:
+            break
+
+        current = best
+
+    print("Local Maximum:", values[current])
+    print("Position:", current)
+
+
+# Input values
+values = [2, 5, 8, 12, 15, 11, 7, 4]
+
+print("Hill Climbing Algorithm")
+print("Values:", values)
+
+start = int(input("Enter starting position (0-7): "))
+
+if 0 <= start < len(values):
+    hill_climbing(values, start)
+else:
+    print("Invalid starting position.")
+
 ```
 
 Q2) B.Write a python program to plot a scatter plot of petal length vs petal 
@@ -39,26 +57,34 @@ width for the Iris dataset. Label the axes and add a title.
 [20 marks] 
 
 ```py
-import pandas as pd 
-import matplotlib.pyplot as plt 
-from sklearn.datasets import load_iris 
-# Load Iris dataset 
-iris = load_iris() 
-# Create DataFrame 
-df = pd.DataFrame(iris.data, 
-columns=iris.feature_names) 
-# Plot scatter plot 
-plt.scatter( 
-df['petal length (cm)'], 
-df['petal width (cm)'] 
-) 
-# Add labels and title 
-plt.xlabel("Petal Length (cm)") 
-plt.ylabel("Petal Width (cm)") 
-plt.title("Petal Length vs Petal Width - Iris 
-Dataset") 
-# Display graph 
-plt.show() 
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+
+# Load Iris dataset
+iris = load_iris()
+
+# Create DataFrame
+df = pd.DataFrame(
+    iris.data,
+    columns=iris.feature_names
+)
+
+# Plot scatter plot
+plt.scatter(
+    df['petal length (cm)'],
+    df['petal width (cm)']
+)
+
+# Add labels and title
+plt.xlabel("Petal Length (cm)")
+plt.ylabel("Petal Width (cm)")
+plt.title("Petal Length vs Petal Width - Iris Dataset")
+
+# Display graph
+plt.show()
+
 ```
 OR 
 Q2) B.Write a python program to implement the Alpha–Beta pruning with 
@@ -66,60 +92,68 @@ depth limit and heuristic.
 [20 marks]
 
 ```py
-def alpha_beta(depth, node, alpha, beta, 
-maximizing_player): 
-    # Depth limit reached 
-    if depth == 3: 
-        return heuristic[node] 
- 
-    if maximizing_player: 
-        best = -999 
- 
-        for i in range(2): 
-            value = alpha_beta( 
-                depth + 1, 
-                node * 2 + i, 
-                alpha, 
-                beta, 
-                False 
-            ) 
- 
-            best = max(best, value) 
-            alpha = max(alpha, best) 
- 
-            # Beta pruning 
-            if beta <= alpha: 
-                print("Beta Pruning at node:", node) 
-                break 
- 
-        return best 
- 
-    else: 
-        best = 999 
- 
-        for i in range(2): 
-            value = alpha_beta( 
-                depth + 1, 
-                node * 2 + i, 
-                alpha, 
-                beta, 
-                True 
-            ) 
- 
-            best = min(best, value) 
-            beta = min(beta, best) 
- 
-            # Alpha pruning 
-            if beta <= alpha: 
-                print("Alpha Pruning at node:", node) 
-break 
-return best 
-# Heuristic values of leaf nodes 
-heuristic = [3, 5, 6, 9, 1, 2, 0, -1] 
-alpha = -999 
-beta = 999 
-print("Alpha-Beta Pruning") 
-print("Heuristic Values:", heuristic) 
-result = alpha_beta(0, 0, alpha, beta, True) 
+
+def alpha_beta(depth, node, alpha, beta, maximizing_player):
+    # Depth limit reached
+    if depth == 3:
+        return heuristic[node]
+
+    if maximizing_player:
+        best = -999
+
+        for i in range(2):
+            value = alpha_beta(
+                depth + 1,
+                node * 2 + i,
+                alpha,
+                beta,
+                False
+            )
+
+            best = max(best, value)
+            alpha = max(alpha, best)
+
+            # Beta pruning
+            if beta <= alpha:
+                print("Beta Pruning at node:", node)
+                break
+
+        return best
+
+    else:
+        best = 999
+
+        for i in range(2):
+            value = alpha_beta(
+                depth + 1,
+                node * 2 + i,
+                alpha,
+                beta,
+                True
+            )
+
+            best = min(best, value)
+            beta = min(beta, best)
+
+            # Alpha pruning
+            if beta <= alpha:
+                print("Alpha Pruning at node:", node)
+                break
+
+        return best
+
+
+# Heuristic values of leaf nodes
+heuristic = [3, 5, 6, 9, 1, 2, 0, -1]
+
+alpha = -999
+beta = 999
+
+print("Alpha-Beta Pruning")
+print("Heuristic Values:", heuristic)
+
+result = alpha_beta(0, 0, alpha, beta, True)
+
 print("Optimal Value:", result)
+
 ```
